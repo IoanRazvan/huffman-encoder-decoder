@@ -1,3 +1,6 @@
 *.exe
 *.pdf
 .vscode/
+*.out
+TODO
+bin/
