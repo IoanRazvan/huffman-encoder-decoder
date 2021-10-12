@@ -8,8 +8,8 @@
 #include <cstring>
 #include <cerrno>
 #include <climits>
-#include "../headers/HuffmanEncoder.h"
-#include "../headers/file_stream_handling.h"
+#include "HuffmanEncoder.h"
+#include "file_stream_handling.h"
 
 using namespace std;
 

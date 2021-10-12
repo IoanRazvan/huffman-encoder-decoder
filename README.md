@@ -33,7 +33,7 @@ make encoder-example
 and to run this executable you can use:
 
 ```bash
-./bin/HuffmanEncoderTest <input_filename> <encoded_output_filename>
+./bin/encoder <input_filename> <encoded_output_filename>
 ```
 
 Where `input_filename` is the name of the file to be encoded and `encoded_output_filename` is the name of the file that will be used to output the result of the encoding.
@@ -47,7 +47,7 @@ make decoder-example
 and to run this executable you can use:
 
 ```bash
-./bin/HuffmanDecoderTest <encoded_input_filename> <decoded_output_filename>
+./bin/decoder <encoded_input_filename> <decoded_output_filename>
 ```
 
 Where `encoded_input_filename` is the name of a file previously encoded using `HuffmanEncoder`'s member function `encodeFile` and `decoded_output_filename` is the name of the file that will be used to output the result of decoding the former file.

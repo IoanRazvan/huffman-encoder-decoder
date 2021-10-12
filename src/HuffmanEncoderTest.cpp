@@ -1,4 +1,4 @@
-#include "../headers/HuffmanEncoder.h"
+#include "HuffmanEncoder.h"
 #include <iostream>
 #include <stdexcept>
 #include <string>

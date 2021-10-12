@@ -1,4 +1,4 @@
-#include "../headers/DataStructures.h"
+#include "DataStructures.h"
 
 LinkedNode::LinkedNode(NonLinkedNode nln) : LinkedNode(nln.ch, nln.count, nullptr, nullptr) {}
 

@@ -2,8 +2,8 @@
 #include <stdexcept>
 #include <new>
 #include <climits>
-#include "../headers/HuffmanDecoder.h"
-#include "../headers/file_stream_handling.h"
+#include "HuffmanDecoder.h"
+#include "file_stream_handling.h"
 
 using namespace std;
 
