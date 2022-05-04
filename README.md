@@ -1,4 +1,4 @@
-# Huffman Encoder & Decoder
+# huffman-encoder-decoder
 
 ## Introduction
 
