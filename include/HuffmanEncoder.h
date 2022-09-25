@@ -6,7 +6,8 @@
 #include <string>
 #include <map>
 #include <vector>
-#include <list>
+#include <queue>
+#include <functional>
 #include "StackAllocator.hpp"
 #include "DataStructures.h"
 
@@ -20,10 +21,12 @@ private:
     StackAllocator<LinkedNode> linkedNodesAllocator;
     LinkedNode * root;
 
+    using PriorityQueue = std::priority_queue<LinkedNode *, std::vector<LinkedNode *>, std::function<bool(LinkedNode *, LinkedNode *)>>;
+
     std::map<char, unsigned long> getCharToOccurrences(std::ifstream & fin);
     void setMembers(std::map<char, unsigned long> & charToOccurrences);
     void setRoot(std::map<char, unsigned long> & charToOccurrences);
-    void buildTree(std::list<LinkedNode *> &leafNodes);
+    void buildTree(PriorityQueue &leafNodes);
     void setCharToCode();
     std::vector<NonLinkedNode> convertTreeToArray();
     void convertFileContents(std::ifstream & fin, std::ofstream & fout);

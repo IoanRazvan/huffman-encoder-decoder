@@ -2,7 +2,6 @@
 #include <algorithm>
 #include <iterator>
 #include <new>
-#include <list>
 #include <vector>
 #include <stack>
 #include <cstring>
@@ -48,29 +47,27 @@ void HuffmanEncoder::setMembers(map<char, unsigned long> &charToOccurrences)
 
 void HuffmanEncoder::setRoot(map<char, unsigned long> &charToOccurrences)
 {
-    list<LinkedNode *> leafNodes(numberOfLeafNodes);
-    transform(charToOccurrences.begin(), charToOccurrences.end(), leafNodes.begin(),
+    auto comparator = [](const LinkedNode *a, const LinkedNode *b) {
+        return a->count >= b->count;
+    };
+    vector<LinkedNode *> nodes(numberOfLeafNodes);
+    transform(charToOccurrences.begin(), charToOccurrences.end(), nodes.begin(),
               [this](auto charOccurrencesPair) { return new (this->linkedNodesAllocator.nextAddress()) LinkedNode(charOccurrencesPair.first, charOccurrencesPair.second); });
-    buildTree(leafNodes);
+    PriorityQueue nodesPQ(comparator, move(nodes));
+    buildTree(nodesPQ);
 }
 
-void HuffmanEncoder::buildTree(list<LinkedNode *> & leafNodes)
+void HuffmanEncoder::buildTree(PriorityQueue & leafNodes)
 {
-    auto comparator = [](const LinkedNode *a, const LinkedNode *b) {
-        return a->count < b->count;
-    };
-
     while (leafNodes.size() > 1)
     {
-        auto first_minimum_it = min_element(leafNodes.begin(), leafNodes.end(), comparator);
-        LinkedNode *first_minimum = *first_minimum_it;
-        leafNodes.erase(first_minimum_it);
-        auto second_minimum_it = min_element(leafNodes.begin(), leafNodes.end(), comparator);
-        LinkedNode *second_minimum = *second_minimum_it;
-        leafNodes.erase(second_minimum_it);
-        leafNodes.push_front(new (linkedNodesAllocator.nextAddress()) LinkedNode(EOF, first_minimum->count + second_minimum->count, first_minimum, second_minimum));
+        auto first_minimum = leafNodes.top();
+        leafNodes.pop();
+        auto second_minimum = leafNodes.top();
+        leafNodes.pop();
+        leafNodes.push(new (linkedNodesAllocator.nextAddress()) LinkedNode(EOF, first_minimum->count + second_minimum->count, first_minimum, second_minimum));
     }
-    root = leafNodes.front();
+    root = leafNodes.top();
 }
 
 
